@@ -5,7 +5,7 @@ class DirectoryEntry extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.colStyle = {
+    this.colStyle = { //styling for columns and rows
       padding: '1rem',
       backgroundColor: '#33b5e5',
       border: '2px solid #fff',

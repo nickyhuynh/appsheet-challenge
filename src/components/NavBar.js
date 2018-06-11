@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Grid, Row, Col, Navbar, Nav, NavItem, MenuItem, NavDropdown} from 'react-bootstrap';
 
 class NavBar extends Component {
-  handleSelect(eventKey) {
+  handleSelect(eventKey) { //switch to handle events
     switch(eventKey) {
       case 3.1:
         var win = window.open("https://nickyhuynh.com", '_blank');
