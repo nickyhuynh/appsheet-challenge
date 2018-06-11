@@ -1,45 +1,30 @@
 import React, { Component } from 'react';
 import {Row, Col} from 'react-bootstrap';
-import {trim} from '../Helpers';
 
 class DirectoryEntry extends Component {
   constructor(props) {
     super(props);
     this.props = props;
+    this.colStyle = {
+      padding: '1rem',
+      backgroundColor: '#33b5e5',
+      border: '2px solid #fff',
+      color: '#fff',
+      textAlign: 'center'
+    }
 
-    this.state = {person: {}}
-  }
-
-  componentDidMount() {
-    this.getPerson();
-  }
-
-  getPerson() {
-      fetch(`http://appsheettest1.azurewebsites.net/sample/detail/${this.props.userId}`, {
-        method: 'get',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json'
-        }}
-      ).then(function(res) {
-        return res.json();
-      })
-      .then(function(resJson) {
-        this.setState({ person: resJson })
-      }.bind(this));
+    this.rowStyle = {
+      margin: '1rem',
+    }
   }
 
   render() {
-    var rgx = new RegExp(/^[1-9]\d{2}-\d{3}-\d{4}$/);
-    if(!rgx.test(trim(this.state.person["number"]))) {
-      return null;
-    }
     return (
-      <Row>
-        <Col md={1}>{this.state.person["name"]}</Col>
-        <Col md={1}>{this.state.person["age"]}</Col>
-        <Col md={3}>{this.state.person["number"]}</Col>
-        <Col md={6}>{this.state.person["bio"]}</Col>
+      <Row style={this.rowStyle}>
+        <Col style={this.colStyle} md={1}>{this.props.person["name"]}</Col>
+        <Col style={this.colStyle} md={1}>{this.props.person["age"]}</Col>
+        <Col style={this.colStyle} md={3}>{this.props.person["number"]}</Col>
+        <Col style={this.colStyle} md={6}>{this.props.person["bio"]}</Col>
       </Row>
     );
   }

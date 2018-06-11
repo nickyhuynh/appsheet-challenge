@@ -5,15 +5,16 @@ class DirectoryContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {people: []};
+    this.state = {peopleIds: []};
+    this.ids = [];
   }
 
   componentDidMount() {
-    this.getUsers();
+    this.getIds("");
   }
 
-  getUsers() {
-    fetch('https://appsheettest1.azurewebsites.net/sample/list', {
+  getIds(token) {
+    fetch(`https://appsheettest1.azurewebsites.net/sample/list?token=${token}`, {
       method: 'get',
       headers: {
         'Accept': 'application/json',
@@ -23,14 +24,18 @@ class DirectoryContainer extends Component {
       return res.json();
     })
     .then(function(resJson) {
-      this.setState({ people: resJson["result"] })
-      console.log(this.state.people);
+      this.ids = this.ids.concat(resJson["result"]);
+      if(resJson["token"] != null) {
+        this.getIds(resJson["token"])
+      } else {
+        this.setState({peopleIds: this.ids})
+      }
     }.bind(this));
   }
 
   render() {
     return (
-      <DirectoryEntries directoryIds={this.state.people}/>
+      <DirectoryEntries peopleIds={this.state.peopleIds}/>
     )
   }
 }
