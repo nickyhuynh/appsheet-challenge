@@ -13,6 +13,19 @@ class DirectoryContainer extends Component {
   }
 
   getUsers() {
+    fetch('https://appsheettest1.azurewebsites.net/sample/list', {
+      method: 'get',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }}
+    ).then(function(res) {
+      return res.json();
+    })
+    .then(function(resJson) {
+      this.setState({ people: resJson["result"] })
+      console.log(this.state.people);
+    }.bind(this));
   }
 
   render() {
