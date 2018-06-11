@@ -13,11 +13,11 @@ class DirectoryEntries extends Component {
 
   render() {
     return (
-      <div>
+      <Grid>
         {this.props.directoryIds.map(function(id) {
-          return <div>{id}</div>;
+          return <DirectoryEntry key={id} userId={id}/>;
         })};
-      </div>
+      </Grid>
     );
   }
 }
